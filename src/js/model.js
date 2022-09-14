@@ -1,9 +1,15 @@
 import { async } from 'regenerator-runtime';
-import { API_URL } from './config';
+import { API_URL, RES_PER_PAGE } from './config';
 import { getJSON } from './helpers';
 
 export const state = {
     recipe: {},
+    search: {
+        query: '',
+        results: [],
+        page: 1,
+        resultsPerPage: RES_PER_PAGE,
+    },
 };
 
 export const loadRecipe = async function (id) {
@@ -24,4 +30,32 @@ export const loadRecipe = async function (id) {
     } catch (err) {
         throw err;
     }
+};
+
+export const searchRecipes = async function (query) {
+    try {
+        const data = await getJSON(`${API_URL}?search=${query}`);
+
+        state.search.results = data.data.recipes.map(rec => {
+            return {
+                id: rec.id,
+                title: rec.title,
+                publisher: rec.publisher,
+                image: rec.image_url,
+            };
+        });
+
+        // https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const getSearchResultsPage = function (page = state.search.page) {
+    state.search.page = page;
+
+    const startIndex = (page - 1) * state.search.resultsPerPage;
+    const endIndex = page * state.search.resultsPerPage;
+
+    return state.search.results.slice(startIndex, endIndex);
 };
