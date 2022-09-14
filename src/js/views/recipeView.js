@@ -13,6 +13,19 @@ class RecipeView extends View {
         );
     }
 
+    addHandlerUpdateServings(handler) {
+        this._parentElement.addEventListener('click', function (e) {
+            const btn = e.target.closest('.btn--increase-servings');
+
+            if (!btn) return;
+
+            const newServings = +btn.dataset.newServings;
+            if (newServings <= 0) return;
+
+            handler(newServings);
+        });
+    }
+
     _generateMarkup() {
         return `
         <figure class="recipe__fig">
@@ -44,12 +57,16 @@ class RecipeView extends View {
               <span class="recipe__info-text">servings</span>
       
               <div class="recipe__info-buttons">
-                  <button class="btn--tiny btn--increase-servings">
+                  <button class="btn--tiny btn--increase-servings" data-new-servings="${
+                      this._data.servings - 1
+                  }">
                       <svg>
                           <use href="${icons}#icon-minus-circle"></use>
                       </svg>
                   </button>
-                  <button class="btn--tiny btn--increase-servings">
+                  <button class="btn--tiny btn--increase-servings" data-new-servings="${
+                      this._data.servings + 1
+                  }">
                       <svg>
                           <use href="${icons}#icon-plus-circle"></use>
                       </svg>

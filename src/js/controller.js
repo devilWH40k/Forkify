@@ -13,6 +13,9 @@ const controlRecipes = async function () {
 
         if (!id) return;
 
+        // update results to mark the active one
+        resultsView.update(model.getSearchResultsPage());
+
         // rendering loading spinner
         recipeView.renderSpinner();
 
@@ -49,8 +52,7 @@ const controlSearchResults = async function () {
         // rendering pagination
         paginationView.render(model.state.search);
     } catch (err) {
-        // temporary for revealing app mistakes
-        resultsView.renderError(err.message);
+        resultsView.renderError();
     }
 };
 
@@ -59,8 +61,17 @@ const controlPaginationBtn = function (page) {
     paginationView.render(model.state.search);
 };
 
+const controlServings = function (newServings) {
+    // recalculate amount of ingridients
+    model.updateServings(newServings);
+
+    // update recipeView
+    recipeView.update(model.state.recipe);
+};
+
 const init = function () {
     recipeView.addHandlerRender(controlRecipes);
+    recipeView.addHandlerUpdateServings(controlServings);
     searchView.addHandlerSearch(controlSearchResults);
     paginationView.addHandlersPagination(controlPaginationBtn);
 };
