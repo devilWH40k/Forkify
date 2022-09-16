@@ -36,14 +36,13 @@ export default class View {
             // rendering only elems with different text
             if (
                 !newEl.isEqualNode(currEl) &&
-                newEl.firstChild.nodeValue.trim() !== ''
+                newEl.firstChild?.nodeValue.trim() !== ''
             ) {
                 currEl.textContent = newEl.textContent;
             }
 
             // Update changed attributes
             if (!newEl.isEqualNode(currEl)) {
-                console.log(Array.from(newEl.attributes));
                 Array.from(newEl.attributes).forEach(attr => {
                     currEl.setAttribute(attr.name, attr.value);
                 });
