@@ -1,29 +1,29 @@
 {
-  "name": "forkify",
-  "version": "1.0.0",
-  "description": "Recipe application",
-  "main": "index.js",
-  "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/devilWH40k/Forkify.git"
-  },
-  "author": "Devil",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/devilWH40k/Forkify/issues"
-  },
-  "homepage": "https://github.com/devilWH40k/Forkify#readme",
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.7.0",
-    "parcel": "^2.7.0"
-  },
-  "dependencies": {
-    "core-js": "^3.25.1",
-    "fractional": "^1.0.0",
-    "regenerator-runtime": "^0.13.9"
-  }
+    "name": "forkify",
+    "version": "1.0.0",
+    "description": "Recipe application",
+    "default": "index.html",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html --dist-dir ./dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/devilWH40k/Forkify.git"
+    },
+    "author": "Devil",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/devilWH40k/Forkify/issues"
+    },
+    "homepage": "https://github.com/devilWH40k/Forkify#readme",
+    "devDependencies": {
+        "@parcel/transformer-sass": "^2.7.0",
+        "parcel": "^2.7.0"
+    },
+    "dependencies": {
+        "core-js": "^3.25.1",
+        "fractional": "^1.0.0",
+        "regenerator-runtime": "^0.13.9"
+    }
 }
